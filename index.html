@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/e01e97a33e.js" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+      <div id="contenedor-body">
+            <h1>Proyecto Jquery - Álvaro Fernández Domingo</h1>
+            <input type="text" id="input" placeholder="Añada un nuevo proyecto" v-model="nuevo_proyecto"
+                  @keyup.enter="nuevoProyecto">
+            <div id="buscar">
+                  <input type="text" id="input" placeholder="Buscar por nombre" v-model="filtrado" @keyup.enter="filtrarProyectos">
+                  <input type="checkbox" id="baja" value="baja" v-model="filtrado_prioridad">
+                  <label for="baja">baja</label>
+                  <input type="checkbox" id="normal" value="normal" v-model="filtrado_prioridad">
+                  <label for="normal">normal</label>
+                  <input type="checkbox" id="alta" value="alta" v-model="filtrado_prioridad">
+                  <label for="alta">alta</label>
+            </div>
+            <hr>
+            <section class="pendientes">
+                  <img>
+                  <span> <span id="pendientes"></span>{{calcularProyectosTerminados}} pendientes de un total de
+                        {{calcularProyectos}}<span id="totales"></span></span>
+                  <hr id="vertical">
+                  <span @click.stop="eliminarFinalizados()" id="borrar">X borrar tareas completadas</span>
+            </section>
+            <hr>
+            <section id="tareas">
+                  <h1 v-if="!filtrarProyectos" class="no-proyectos">No hay proyectos con ese valor</h1>
+                  <div class="contenedor-tareas" v-for="proyecto of filtrarProyectos"
+                        @click.stop="finalizarProyecto(proyecto)" :key="proyecto.codigo">
+                        <section class="contenedor-info">
+                              <div class="parte1">
+                                    <img v-if="proyecto.completada"
+                                          src="https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png"
+                                          class="hecho">
+                                    <img v-else src="https://cdn-icons-png.flaticon.com/512/64/64571.png" class="hecho">
+                                    <span :class="{tareaCompleta:proyecto.completada}">{{proyecto.nombre}}</span>
+                              </div>
+                              <div class="parte2">
+                                    <span>Prioridad</span>
+                                    <button class="prioridad" @click.stop="cambiarPrioridad(proyecto,'baja')"
+                                          :class="{baja:rellenarPrioridad(proyecto,'baja')}">baja</button>
+                                    <button class="prioridad" @click.stop="cambiarPrioridad(proyecto,'normal')"
+                                          :class="{normal:rellenarPrioridad(proyecto,'normal')}">normal</button>
+                                    <button class="prioridad" @click.stop="cambiarPrioridad(proyecto,'alta')"
+                                          :class="{alta:rellenarPrioridad(proyecto,'alta')}">alta</button>
+                                    <span>añadidio hace {{calcularTiempo(proyecto)}} minutos</span>
+                              </div>
+                        </section>
+                        <button @click.stop="eliminarProyecto(proyecto)" class="eliminar"
+                              :src="imagenEliminar"></button>
+                  </div>
+            </section>
+      </div>
+      <footer>
+            <p>Desarrolo por Álvaro Fernández Domingo</p>
+            <p>Código disponible en <i class="fa-brands fa-github">GitHub</i></p>
+      </footer>
+      <script src="index.js"></script>
+</body>
+
+</html>
