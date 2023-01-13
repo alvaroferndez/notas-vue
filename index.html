@@ -20,11 +20,11 @@
                   @keyup.enter="nuevoProyecto">
             <div id="buscar">
                   <input type="text" id="input" placeholder="Buscar por nombre" v-model="filtrado" @keyup.enter="filtrarProyectos">
-                  <input type="checkbox" id="baja" value="baja" v-model="filtrado_prioridad">
+                  <input type="checkbox" class="press" id="baja" value="baja" v-model="filtrado_prioridad">
                   <label for="baja">baja</label>
-                  <input type="checkbox" id="normal" value="normal" v-model="filtrado_prioridad">
+                  <input type="checkbox" class="press" id="normal" value="normal" v-model="filtrado_prioridad">
                   <label for="normal">normal</label>
-                  <input type="checkbox" id="alta" value="alta" v-model="filtrado_prioridad">
+                  <input type="checkbox" class="press" id="alta" value="alta" v-model="filtrado_prioridad">
                   <label for="alta">alta</label>
             </div>
             <hr>
@@ -33,12 +33,12 @@
                   <span> <span id="pendientes"></span>{{calcularProyectosTerminados}} pendientes de un total de
                         {{calcularProyectos}}<span id="totales"></span></span>
                   <hr id="vertical">
-                  <span @click.stop="eliminarFinalizados()" id="borrar">X borrar tareas completadas</span>
+                  <span @click.stop="eliminarFinalizados()" class="press" id="borrar">X borrar tareas completadas</span>
             </section>
             <hr>
             <section id="tareas">
                   <h1 v-if="!filtrarProyectos" class="no-proyectos">No hay proyectos con ese valor</h1>
-                  <div class="contenedor-tareas" v-for="proyecto of filtrarProyectos"
+                  <div class="contenedor-tareas press" v-for="proyecto of filtrarProyectos"
                         @click.stop="finalizarProyecto(proyecto)" :key="proyecto.codigo">
                         <section class="contenedor-info">
                               <div class="parte1">
@@ -50,17 +50,17 @@
                               </div>
                               <div class="parte2">
                                     <span>Prioridad</span>
-                                    <button class="prioridad" @click.stop="cambiarPrioridad(proyecto,'baja')"
+                                    <button class="prioridad press" @click.stop="cambiarPrioridad(proyecto,'baja')"
                                           :class="{baja:rellenarPrioridad(proyecto,'baja')}">baja</button>
-                                    <button class="prioridad" @click.stop="cambiarPrioridad(proyecto,'normal')"
+                                    <button class="prioridad press" @click.stop="cambiarPrioridad(proyecto,'normal')"
                                           :class="{normal:rellenarPrioridad(proyecto,'normal')}">normal</button>
-                                    <button class="prioridad" @click.stop="cambiarPrioridad(proyecto,'alta')"
+                                    <button class="prioridad press" @click.stop="cambiarPrioridad(proyecto,'alta')"
                                           :class="{alta:rellenarPrioridad(proyecto,'alta')}">alta</button>
                                     <span>añadidio hace {{calcularTiempo(proyecto)}} minutos</span>
                               </div>
                         </section>
-                        <button @click.stop="eliminarProyecto(proyecto)" class="eliminar"
-                              :src="imagenEliminar"></button>
+                        <img @click.stop="eliminarProyecto(proyecto)" class="eliminar"
+                              :src="imagen_eliminar"></img>
                   </div>
             </section>
       </div>

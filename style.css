@@ -8,6 +8,10 @@ body{
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.press{
+      cursor: pointer;
+}
+
 #contenedor-body{
       width: 75%;
       height: 75%;

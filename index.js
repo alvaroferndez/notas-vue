@@ -6,7 +6,7 @@ createApp({
                   proyectos:this.obtenerProyectos(),
                   filtrado:"",
                   filtrado_prioridad:[],
-                  imagenEliminar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfiMi9XJEDu2zLYRJfLgMj_6pcmaHbRDv-Yw&usqp=CAU",
+                  imagen_eliminar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfiMi9XJEDu2zLYRJfLgMj_6pcmaHbRDv-Yw&usqp=CAU",
                   nuevo_proyecto:"",
                   codigo:0,
             }
@@ -110,7 +110,7 @@ createApp({
                         lista_filtrada = this.ordenarProyectos(array);
                   }
                   if(lista_filtrada.length > 0){
-                        return lista_filtrada;
+                        return this.ordenarProyectos(lista_filtrada);
                   }else{
                         return false
                   }
